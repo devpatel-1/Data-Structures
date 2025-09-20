@@ -12,7 +12,7 @@ void TOH(int n, char a, char b, char c) {
 }
 
 int main() {
-    int n = 4;  // number of disks
+    int n = 3;  // number of disks
     TOH(n, 'A', 'B', 'C');
     return 0;
 }
