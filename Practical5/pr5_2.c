@@ -10,9 +10,9 @@ int isEmpty() {
     return (front == -1);
 }
 
-// Check if queue is full (allowing all MAX elements)
+// Check if queue is full
 int isFull() {
-    return ((front == 0 && rear == MAX - 1) || (rear + 1 == front));
+    return ((rear + 1) % MAX == front);
 }
 
 // Insert element into circular queue
@@ -23,11 +23,7 @@ void enqueue(int value) {
         if (front == -1)  // First element
             front = 0;
 
-        if (rear == MAX - 1 && front != 0) // wrap around
-            rear = 0;
-        else
-            rear++;
-
+        rear = (rear + 1) % MAX;  // wrap automatically
         queue[rear] = value;
         printf("Inserted %d into queue.\n", value);
     }
@@ -41,10 +37,9 @@ void dequeue() {
         printf("Deleted %d from queue.\n", queue[front]);
         if (front == rear) {  // Only one element
             front = rear = -1;
-        } else if (front == MAX - 1)
-            front = 0;
-        else
-            front++;
+        } else {
+            front = (front + 1) % MAX;  // wrap automatically
+        }
     }
 }
 
